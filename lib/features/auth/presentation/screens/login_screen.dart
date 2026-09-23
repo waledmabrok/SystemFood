@@ -130,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 24),
 
                   Text(
-                    'فود برو',
+                    'طاطس',
                     style: AppTypography.headlineLarge.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.w800,

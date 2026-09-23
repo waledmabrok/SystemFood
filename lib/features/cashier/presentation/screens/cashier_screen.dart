@@ -542,7 +542,7 @@ class _ProductsPanelState extends State<_ProductsPanel> {
                   onChanged: widget.onSearchChanged,
                 ),
               ),
-              const SizedBox(width: 16),
+              /*  const SizedBox(width: 16),
               ElevatedButton.icon(
                 onPressed: widget.onAddProduct,
                 icon: const Icon(Icons.add_rounded),
@@ -557,6 +557,7 @@ class _ProductsPanelState extends State<_ProductsPanel> {
                   elevation: 0,
                 ),
               ),
+            */
             ],
           ),
         ),
@@ -1431,6 +1432,32 @@ class _PaymentDialogState extends State<_PaymentDialog> {
       );
       return;
     }
+
+    // تحقق من رقم الموبايل/المرجع
+    final ref = _refCtrl.text.trim();
+    if (_method == PaymentMethod.vodafone) {
+      if (ref.isEmpty || ref.length != 11) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('رقم فودافون كاش لازم يكون 11 رقم'),
+            backgroundColor: AppColors.error,
+          ),
+        );
+        return;
+      }
+    } else if (_method == PaymentMethod.cash &&
+        ref.isNotEmpty &&
+        ref.length != 11) {
+      // اختياري، بس لو اتكتب لازم يكون كامل
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('رقم الموبايل لازم يكون 11 رقم'),
+          backgroundColor: AppColors.error,
+        ),
+      );
+      return;
+    }
+
     setState(() => _processing = true);
     final finalPaidAmount = _method == PaymentMethod.cash
         ? _paid
@@ -1438,7 +1465,7 @@ class _PaymentDialogState extends State<_PaymentDialog> {
     await widget.onConfirm(
       _method,
       finalPaidAmount,
-      _refCtrl.text.isNotEmpty ? _refCtrl.text : null,
+      ref.isNotEmpty ? ref : null,
     );
   }
 
@@ -1660,6 +1687,12 @@ class _PaymentDialogState extends State<_PaymentDialog> {
                       TextFormField(
                         controller: _refCtrl,
                         style: AppTypography.headlineSmall,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          if (_method == PaymentMethod.vodafone)
+                            LengthLimitingTextInputFormatter(11),
+                        ],
                         decoration: InputDecoration(
                           hintText: _method == PaymentMethod.vodafone
                               ? '01xxxxxxxxx'
@@ -1667,6 +1700,20 @@ class _PaymentDialogState extends State<_PaymentDialog> {
                           filled: true,
                           fillColor: AppColors.surface,
                         ),
+                        validator: (value) {
+                          if (_method == PaymentMethod.vodafone) {
+                            if (value == null || value.trim().isEmpty) {
+                              return 'من فضلك أدخل رقم فودافون كاش';
+                            }
+                            if (value.trim().length != 11) {
+                              return 'الرقم لازم يكون 11 رقم';
+                            }
+                            if (!value.trim().startsWith('01')) {
+                              return 'الرقم لازم يبدأ بـ 01';
+                            }
+                          }
+                          return null;
+                        },
                       ),
                     ],
                   ],
@@ -1696,7 +1743,7 @@ class _PaymentDialogState extends State<_PaymentDialog> {
                     ),
                     const SizedBox(height: AppDimensions.space32),
 
-                    _DarkSummaryRow('الإجمالي الفرعي', widget.subtotal),
+                    _DarkSummaryRow('الإجمالي ', widget.subtotal),
                     if (widget.discount > 0) ...[
                       const SizedBox(height: 12),
                       _DarkSummaryRow(
@@ -1713,7 +1760,7 @@ class _PaymentDialogState extends State<_PaymentDialog> {
                       ),
                     ),
                     _DarkSummaryRow(
-                      'الإجمالي المطلوب',
+                      'الإجمالي ',
                       widget.total,
                       isTotal: true,
                       color: AppColors.accent,

@@ -230,8 +230,11 @@ class DatabaseHelper {
     final now = DateTime.now().toIso8601String();
 
     // التحقق من وجود owner قبل إضافته
-    final ownerCheck = await db.query('users',
-        where: 'username = ?', whereArgs: ['owner']);
+    final ownerCheck = await db.query(
+      'users',
+      where: 'username = ?',
+      whereArgs: ['owner'],
+    );
     if (ownerCheck.isEmpty) {
       await db.insert('users', {
         'id': _uuid.v4(),
@@ -245,8 +248,11 @@ class DatabaseHelper {
     }
 
     // التحقق من وجود cashier قبل إضافته
-    final cashierCheck = await db.query('users',
-        where: 'username = ?', whereArgs: ['cashier']);
+    final cashierCheck = await db.query(
+      'users',
+      where: 'username = ?',
+      whereArgs: ['cashier'],
+    );
     if (cashierCheck.isEmpty) {
       await db.insert('users', {
         'id': _uuid.v4(),
@@ -343,6 +349,16 @@ class DatabaseHelper {
       'key': key,
       'value': value,
     }, conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  /// ─── بصمة الجهاز (Device Fingerprint) ──────────────────────────
+
+  Future<String?> getSavedDeviceId() async {
+    return await getSetting('device_fingerprint');
+  }
+
+  Future<void> saveDeviceId(String fingerprint) async {
+    await setSetting('device_fingerprint', fingerprint);
   }
 
   /// ─── رقم الطلب التسلسلي ─────────────────────────────────────────

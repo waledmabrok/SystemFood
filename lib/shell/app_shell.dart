@@ -41,9 +41,9 @@ class _AppShellState extends State<AppShell> {
 
   void _logout() {
     SessionService.instance.logout();
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => const LoginScreen()),
-    );
+    Navigator.of(
+      context,
+    ).pushReplacement(MaterialPageRoute(builder: (_) => const LoginScreen()));
   }
 
   @override
@@ -54,10 +54,7 @@ class _AppShellState extends State<AppShell> {
         backgroundColor: AppColors.background,
         body: Column(
           children: [
-            _CashierTopBar(
-              userName: widget.user.name,
-              onLogout: _logout,
-            ),
+            _CashierTopBar(userName: widget.user.name, onLogout: _logout),
             const Expanded(child: CashierScreen()),
           ],
         ),
@@ -130,11 +127,14 @@ class _CashierTopBar extends StatelessWidget {
       child: Row(
         children: [
           // اسم النظام
-          const Icon(Icons.restaurant_rounded,
-              color: AppColors.primary, size: 22),
+          const Icon(
+            Icons.restaurant_rounded,
+            color: AppColors.primary,
+            size: 22,
+          ),
           const SizedBox(width: 10),
           Text(
-            'فود برو — نقطة البيع',
+            'طاطس — نقطة البيع',
             style: AppTypography.titleSmall.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w700,
@@ -144,8 +144,7 @@ class _CashierTopBar extends StatelessWidget {
           const Spacer(),
 
           // اسم الكاشير
-          const Icon(Icons.person_rounded,
-              color: Color(0xFF94A3B8), size: 18),
+          const Icon(Icons.person_rounded, color: Color(0xFF94A3B8), size: 18),
           const SizedBox(width: 6),
           Text(
             userName,
@@ -171,8 +170,7 @@ class _CashierTopBar extends StatelessWidget {
             label: const Text('خروج'),
             style: TextButton.styleFrom(
               foregroundColor: const Color(0xFF94A3B8),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             ),
           ),
         ],

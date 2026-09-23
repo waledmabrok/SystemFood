@@ -2,7 +2,7 @@
 /// لا تُكتب نصوص عربية داخل الـ Widgets مباشرةً
 abstract final class AppStrings {
   // ─── اسم التطبيق ──────────────────────────────────────────────────
-  static const String appName = 'فود برو';
+  static const String appName = 'طاطس';
   static const String appSubtitle = 'نظام إدارة المطاعم';
   static const String currency = 'ج.م';
 
@@ -134,7 +134,8 @@ abstract final class AppStrings {
   static const String orderCancelled = 'ملغي';
   static const String orderRefunded = 'مسترد';
   static const String orderNoOrders = 'لا توجد طلبات';
-  static const String orderNoOrdersDesc = 'ستظهر هنا الطلبات بعد إنشائها من نقطة البيع';
+  static const String orderNoOrdersDesc =
+      'ستظهر هنا الطلبات بعد إنشائها من نقطة البيع';
   static const String orderCancel = 'إلغاء الطلب';
   static const String orderCancelConfirm = 'هل أنت متأكد من إلغاء هذا الطلب؟';
 
@@ -164,7 +165,8 @@ abstract final class AppStrings {
   static const String expenseAddNew = 'تسجيل مصروف';
   static const String expenseEdit = 'تعديل المصروف';
   static const String expenseNoExpenses = 'لا توجد مصروفات';
-  static const String expenseNoExpensesDesc = 'سجّل مصروفات المطعم لمتابعة التدفق النقدي';
+  static const String expenseNoExpensesDesc =
+      'سجّل مصروفات المطعم لمتابعة التدفق النقدي';
 
   // ─── المستخدمون ───────────────────────────────────────────────────
   static const String usersTitle = 'المستخدمون';
@@ -212,9 +214,11 @@ abstract final class AppStrings {
   static const String msgNoData = 'لا توجد بيانات';
   static const String msgError = 'حدث خطأ، يرجى المحاولة مرة أخرى';
   static const String msgSuccess = 'تمت العملية بنجاح';
-  static const String msgDeleteConfirm = 'هل أنت متأكد من الحذف؟ لا يمكن التراجع عن هذا الإجراء.';
+  static const String msgDeleteConfirm =
+      'هل أنت متأكد من الحذف؟ لا يمكن التراجع عن هذا الإجراء.';
   static const String msgUnderConstruction = 'هذا القسم قيد التطوير';
-  static const String msgUnderConstructionDesc = 'سيكون هذا القسم متاحاً في الإصدار القادم';
+  static const String msgUnderConstructionDesc =
+      'سيكون هذا القسم متاحاً في الإصدار القادم';
 
   // ─── التاريخ والوقت ───────────────────────────────────────────────
   static const String today = 'اليوم';
@@ -229,11 +233,13 @@ abstract final class AppStrings {
   static const String salesOverviewTitle = 'نظرة عامة على المبيعات';
   static const String salesOverviewSubtitle = 'إحصائيات المبيعات الأسبوعية';
   static const String salesChartComingSoon = 'الرسم البياني قريباً';
-  static const String salesChartDesc = 'سيتم عرض بيانات المبيعات هنا بعد تسجيل أول طلب';
+  static const String salesChartDesc =
+      'سيتم عرض بيانات المبيعات هنا بعد تسجيل أول طلب';
   static const String recentOrdersTitle = 'آخر الطلبات';
   static const String recentOrdersSubtitle = 'آخر الطلبات المنفذة اليوم';
   static const String recentOrdersEmpty = 'لا توجد طلبات بعد';
-  static const String recentOrdersEmptyDesc = 'ستظهر هنا الطلبات الجديدة عند إنشائها';
+  static const String recentOrdersEmptyDesc =
+      'ستظهر هنا الطلبات الجديدة عند إنشائها';
   static const String lowStockTitle = 'أصناف تحتاج تخزين';
   static const String lowStockSubtitle = 'أصناف وصلت للحد الأدنى';
   static const String lowStockEmpty = 'لا توجد تنبيهات مخزون';
